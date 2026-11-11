@@ -1,0 +1,70 @@
+single {
+  "metrics": {
+    "accuracy": 0.9606,
+    "precision": 0.9644478063540091,
+    "recall": 0.9564412882576515,
+    "f1": 0.9604278611962035,
+    "auc_roc": 0.9906372096254884
+  },
+  "timings": {
+    "preprocessing_seconds": 0.07660291600041091,
+    "cluster_startup_seconds": 0.0,
+    "data_distribution_seconds": 0.0,
+    "fit_seconds": 1.0600105000194162
+  },
+  "train_total_seconds": 1.2033239580050576,
+  "n_jobs": 4,
+  "transformed_features": 30,
+  "worker_evidence": [],
+  "reload_max_probability_difference": 0.0
+}
+[13:36:13] Task [xgboost.dask-0]:tcp://127.0.0.1:52073 got rank 0
+[13:36:13] Task [xgboost.dask-1]:tcp://127.0.0.1:52074 got rank 1
+dask {
+  "metrics": {
+    "accuracy": 0.96215,
+    "precision": 0.9663403310456197,
+    "recall": 0.9576415283056612,
+    "f1": 0.9619712649452427,
+    "auc_roc": 0.9910933246437329
+  },
+  "timings": {
+    "preprocessing_seconds": 0.07022045901976526,
+    "cluster_startup_seconds": 2.7056043340126052,
+    "data_distribution_seconds": 0.07603908298187889,
+    "fit_seconds": 2.435274124989519
+  },
+  "train_total_seconds": 6.249082167021697,
+  "n_jobs": 2,
+  "transformed_features": 30,
+  "worker_evidence": [
+    {
+      "address": "tcp://127.0.0.1:52073",
+      "pid": 38435,
+      "rank": 0,
+      "world_size": 2
+    },
+    {
+      "address": "tcp://127.0.0.1:52074",
+      "pid": 38436,
+      "rank": 1,
+      "world_size": 2
+    }
+  ],
+  "reload_max_probability_difference": 0.0
+}
+comparison {
+  "identical_split": true,
+  "label_agreement": 0.9848,
+  "probability_abs_difference_mean": 0.024540331214666367,
+  "probability_abs_difference_max": 0.40768712759017944,
+  "probability_abs_difference_p95": 0.09917475283145905,
+  "fit_speedup_single_over_dask": 0.43527358548351447,
+  "metric_dask_minus_single": {
+    "accuracy": 0.0015499999999999403,
+    "precision": 0.0018925246916106087,
+    "recall": 0.0012002400480096709,
+    "f1": 0.0015434037490391628,
+    "auc_roc": 0.0004561150182444962
+  }
+}

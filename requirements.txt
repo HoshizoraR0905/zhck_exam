@@ -1,0 +1,12 @@
+# Validated on Python 3.10.4 / macOS arm64. Full transitive lock: requirements.lock.txt.
+xgboost==3.2.0
+dask[dataframe,distributed]==2026.8.0
+distributed==2026.8.0
+scikit-learn==1.7.2
+numpy==2.2.6
+pandas==2.3.3
+matplotlib==3.10.9
+seaborn==0.13.2
+joblib==1.6.0
+pytest==9.2.0
+threadpoolctl==3.8.0

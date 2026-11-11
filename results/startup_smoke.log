@@ -1,0 +1,16 @@
+startup_script: {'scheduler_address': 'tcp://127.0.0.1:51881', 'workers': ['tcp://127.0.0.1:51889', 'tcp://127.0.0.1:51890']}
+training_ranks: [{'address': 'tcp://127.0.0.1:51889', 'pid': 38406, 'rank': 0, 'world_size': 2}, {'address': 'tcp://127.0.0.1:51890', 'pid': 38407, 'rank': 1, 'world_size': 2}]
+PASS: external scheduler remains available after operator training
+PASS: external-trained model reload predictions unchanged
+cluster_process_log:
+{
+  "scheduler_address": "tcp://127.0.0.1:51881",
+  "workers": [
+    "tcp://127.0.0.1:51889",
+    "tcp://127.0.0.1:51890"
+  ]
+}
+[13:35:39] Task [xgboost.dask-0]:tcp://127.0.0.1:51889 got rank 0
+[13:35:39] Task [xgboost.dask-1]:tcp://127.0.0.1:51890 got rank 1
+
+cluster_exit_code: 0

@@ -1,0 +1,4 @@
+PASS: fresh interpreter has no Dask client
+PASS: single artifact: all 40000 probabilities match in fresh interpreter
+PASS: dask artifact: all 40000 probabilities match in fresh interpreter
+PASS: both artifacts perform inference without a cluster

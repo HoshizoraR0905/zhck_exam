@@ -1,0 +1,139 @@
+..................FF.                                                    [100%]
+=================================== FAILURES ===================================
+________________________ test_input_and_reducer_errors _________________________
+
+data = (array([[-1.32334991,  0.32322201, -0.40384261, ..., -0.51373097,
+        -1.92320398,  1.        ],
+       [-1.623633..., 1, 1, 0, 0, 1, 1,
+       0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1,
+       0, 0, 1, 0, 0, 1]))
+
+    def test_input_and_reducer_errors(data):
+        X, y = data
+        model = DistributedXGBClassifier("single", n_estimators=3)
+        with pytest.raises(RuntimeError):
+>           model.predict(X)
+
+tests/test_operator.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <distributed_xgb.DistributedXGBClassifier object at 0x118de56f0>
+X = array([[-1.32334991,  0.32322201, -0.40384261, ..., -0.51373097,
+        -1.92320398,  1.        ],
+       [-1.6236332...,
+       [-0.65163697,  0.02433466,  2.63373722, ...,  0.62927424,
+        -0.47556449,  1.        ]], shape=(600, 11))
+
+    def predict(self, X):
+>       return self.encoder_.inverse_transform((self.predict_proba(X)[:, 1] >= 0.5).astype(int))
+E       AttributeError: 'DistributedXGBClassifier' object has no attribute 'encoder_'
+
+distributed_xgb.py:306: AttributeError
+________________________ test_real_distributed_training ________________________
+
+data = (array([[-1.32334991,  0.32322201, -0.40384261, ..., -0.51373097,
+        -1.92320398,  1.        ],
+       [-1.623633..., 1, 1, 0, 0, 1, 1,
+       0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1,
+       0, 0, 1, 0, 0, 1]))
+tmp_path = PosixPath('/private/var/folders/1s/vbz405396jn72h4fk8h4p1400000gn/T/pytest-of-yyi/pytest-1/test_real_distributed_training0')
+
+    def test_real_distributed_training(data, tmp_path):
+        from distributed import Client
+        X, y = data
+        single = DistributedXGBClassifier("single", n_estimators=5, n_jobs=2).train(X, y)
+>       distributed = DistributedXGBClassifier("dask", n_estimators=5, n_jobs=1).train(
+            X, y, distributed_config={"n_workers": 2, "threads_per_worker": 1})
+
+tests/test_operator.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+distributed_xgb.py:211: in train
+    model = self._train_dask(train_x, yi[tr], valid_x, yi[va], config)
+distributed_xgb.py:262: in _train_dask
+    wait([dx, dy, dvx, dvy])
+.venv/lib/python3.10/site-packages/distributed/client.py:5559: in wait
+    client = default_client()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+c = None
+
+    def default_client(c=None):
+        """Return a client if one has started
+    
+        Parameters
+        ----------
+        c : Client
+            The client to return. If None, the default client is returned.
+    
+        Returns
+        -------
+        c : Client
+            The client, if one has started
+    
+        See also
+        --------
+        Client.current (alias)
+        """
+        c = c or _get_global_client()
+        if c:
+            return c
+        else:
+>           raise ValueError(
+                "No clients found\n"
+                "Start a client and point it to the scheduler address\n"
+                "  from distributed import Client\n"
+                "  client = Client('ip-addr-of-scheduler:8786')\n"
+            )
+E           ValueError: No clients found
+E           Start a client and point it to the scheduler address
+E             from distributed import Client
+E             client = Client('ip-addr-of-scheduler:8786')
+
+.venv/lib/python3.10/site-packages/distributed/client.py:5885: ValueError
+------------------------------ Captured log call -------------------------------
+INFO     distributed.http.proxy:proxy.py:86 To route to workers diagnostics web server please install jupyter-server-proxy: python -m pip install jupyter-server-proxy
+INFO     distributed.scheduler:scheduler.py:1735 State start
+INFO     distributed.scheduler:scheduler.py:4433   Scheduler at:     tcp://127.0.0.1:50976
+INFO     distributed.scheduler:scheduler.py:4448   dashboard at:  http://127.0.0.1:8787/status
+INFO     distributed.scheduler:scheduler.py:8134 Registering Worker plugin shuffle
+INFO     distributed.nanny:nanny.py:350         Start Nanny at: 'tcp://127.0.0.1:50979'
+INFO     distributed.nanny:nanny.py:350         Start Nanny at: 'tcp://127.0.0.1:50980'
+INFO     distributed.scheduler:scheduler.py:4781 Register worker addr: tcp://127.0.0.1:50985 name: 1
+INFO     distributed.scheduler:scheduler.py:6178 Starting worker compute stream, tcp://127.0.0.1:50985
+INFO     distributed.core:core.py:847 Starting established connection to tcp://127.0.0.1:50988
+INFO     distributed.scheduler:scheduler.py:4781 Register worker addr: tcp://127.0.0.1:50984 name: 0
+INFO     distributed.scheduler:scheduler.py:6178 Starting worker compute stream, tcp://127.0.0.1:50984
+INFO     distributed.core:core.py:847 Starting established connection to tcp://127.0.0.1:50989
+INFO     distributed.scheduler:scheduler.py:5913 Receive client connection: Client-16bc5864-dcc8-11f1-952f-4eeed25cd01c
+INFO     distributed.core:core.py:847 Starting established connection to tcp://127.0.0.1:50990
+INFO     distributed.scheduler:scheduler.py:5958 Remove client Client-16bc5864-dcc8-11f1-952f-4eeed25cd01c
+INFO     distributed.core:core.py:872 Received 'close-stream' from tcp://127.0.0.1:50990; closing.
+INFO     distributed.scheduler:scheduler.py:5958 Remove client Client-16bc5864-dcc8-11f1-952f-4eeed25cd01c
+INFO     distributed.batched:batched.py:122 Batched Comm Closed <TCP (closed) Scheduler->Client local=tcp://127.0.0.1:50976 remote=tcp://127.0.0.1:50990>
+Traceback (most recent call last):
+  File "/Users/yyi/Projects/ZHCK_Exam/.venv/lib/python3.10/site-packages/distributed/batched.py", line 115, in _background_send
+    nbytes = yield coro
+  File "/Users/yyi/Projects/ZHCK_Exam/.venv/lib/python3.10/site-packages/tornado/gen.py", line 783, in run
+    value = future.result()
+  File "/Users/yyi/Projects/ZHCK_Exam/.venv/lib/python3.10/site-packages/distributed/comm/tcp.py", line 263, in write
+    raise CommClosedError()
+distributed.comm.core.CommClosedError
+INFO     distributed.scheduler:scheduler.py:5950 Close client connection: Client-16bc5864-dcc8-11f1-952f-4eeed25cd01c
+INFO     distributed.scheduler:scheduler.py:7553 Retire worker addresses (stimulus_id='retire-workers-1794288735.8671622') (0, 1)
+INFO     distributed.nanny:nanny.py:587 Closing Nanny at 'tcp://127.0.0.1:50979'. Reason: nanny-close
+INFO     distributed.nanny:nanny.py:859 Nanny asking worker to close. Reason: nanny-close
+INFO     distributed.nanny:nanny.py:587 Closing Nanny at 'tcp://127.0.0.1:50980'. Reason: nanny-close
+INFO     distributed.nanny:nanny.py:859 Nanny asking worker to close. Reason: nanny-close
+INFO     distributed.core:core.py:872 Received 'close-stream' from tcp://127.0.0.1:50989; closing.
+INFO     distributed.scheduler:scheduler.py:5598 Remove worker addr: tcp://127.0.0.1:50984 name: 0 (stimulus_id='handle-worker-cleanup-1794288735.86858')
+INFO     distributed.core:core.py:872 Received 'close-stream' from tcp://127.0.0.1:50988; closing.
+INFO     distributed.scheduler:scheduler.py:5598 Remove worker addr: tcp://127.0.0.1:50985 name: 1 (stimulus_id='handle-worker-cleanup-1794288735.8689861')
+INFO     distributed.scheduler:scheduler.py:5726 Lost all workers
+INFO     distributed.nanny:nanny.py:606 Nanny at 'tcp://127.0.0.1:50979' closed.
+INFO     distributed.nanny:nanny.py:606 Nanny at 'tcp://127.0.0.1:50980' closed.
+INFO     distributed.scheduler:scheduler.py:4490 Closing scheduler. Reason: unknown
+INFO     distributed.scheduler:scheduler.py:4518 Scheduler closing all comms
+=========================== short test summary info ============================
+FAILED tests/test_operator.py::test_input_and_reducer_errors - AttributeError...
+FAILED tests/test_operator.py::test_real_distributed_training - ValueError: N...
+2 failed, 19 passed in 56.32s
