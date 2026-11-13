@@ -1,0 +1,6 @@
+[21:03:30] Task [xgboost.dask-0]:tcp://127.0.0.1:64599 got rank 0[21:03:30] Task [xgboost.dask-1]:tcp://127.0.0.1:64600 got rank 1
+
+[21:03:37] Task [xgboost.dask-2]:tcp://127.0.0.1:64645 got rank 2
+[21:03:37] Task [xgboost.dask-1]:tcp://127.0.0.1:64643 got rank 1
+[21:03:37] Task [xgboost.dask-3]:tcp://127.0.0.1:64642 got rank 3
+[21:03:37] Task [xgboost.dask-0]:tcp://127.0.0.1:64644 got rank 0

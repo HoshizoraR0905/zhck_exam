@@ -1,0 +1,44 @@
+{
+  "independent_environment_and_staged_imports": true,
+  "copied_sources_tests_and_historical_results_unchanged": true,
+  "all_json_csv_png_npz_readable": true,
+  "included_configurations_validate": true,
+  "cli_help": true,
+  "readme_examples_syntax_and_document_links": true,
+  "covertype_source_mapping": {
+    "rows": 581012,
+    "features": 54,
+    "mapping": "original target == 2 -> 1, otherwise 0",
+    "label_counts": {
+      "0": 297711,
+      "1": 283301
+    }
+  },
+  "covertype_training_data_sha256": "955061c9d17ae2ca5a236c177f2ac43a09fc308b25fd7a0567809968fea8ae70",
+  "original_covertype_two_and_four_worker_evidence_and_split": true,
+  "fresh_process_model_verification": {
+    "results/single": {
+      "validation_rows": 40000,
+      "max_probability_difference": 0.0,
+      "metrics_match": true
+    },
+    "results/dask": {
+      "validation_rows": 40000,
+      "max_probability_difference": 0.0,
+      "metrics_match": true
+    },
+    "results/covertype_visualizations/single": {
+      "validation_rows": 174304,
+      "max_probability_difference": 0.0,
+      "metrics_match": true
+    },
+    "results/covertype_visualizations/dask": {
+      "validation_rows": 174304,
+      "max_probability_difference": 0.0,
+      "metrics_match": true
+    }
+  },
+  "supplementary_run_same_data_and_validation_split": true,
+  "all_original_project_files_and_results_preserved": 1536,
+  "examination_sha256": "98ddacc4f2e10320cf1013fb8499147b8c103f648b660f5d451ce21904c2c57d"
+}

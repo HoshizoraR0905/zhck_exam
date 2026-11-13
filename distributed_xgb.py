@@ -74,8 +74,10 @@ class DistributedXGBClassifier:
         seed = candidate["random_state"]
         if isinstance(seed, bool) or not isinstance(seed, (int, np.integer)) or not 0 <= seed < 2**32:
             raise ValueError("random_state must be an integer in [0, 2**32)")
-        for name in ("learning_rate", "subsample", "colsample_bytree"):
-            v = candidate[name]
+        for name in ("learning_rate", "subsample", "colsample_bytree", "colsample_bylevel", "colsample_bynode"):
+            v = candidate.get(name, 1.0)
+            if v is None and name not in self.DEFAULTS:
+                continue  # Optional wrapper parameters may defer to the native default.
             if isinstance(v, bool) or not isinstance(v, (int, float)) or not 0 < v <= 1:
                 raise ValueError(f"{name} must be in (0, 1]")
         for name in ("min_child_weight", "gamma", "reg_alpha", "reg_lambda"):
@@ -109,11 +111,19 @@ class DistributedXGBClassifier:
         # sklearn-only controls are recognized via the installed wrapper, not a fixed allowlist.
         native = xgb.XGBClassifier(**candidate).get_xgb_params()
         native.update(n_jobs=1, validate_parameters=True)
+        # Monotonic constraints are positional for this numeric-array operator.
+        # A one-feature probe incorrectly rejects valid multi-feature constraints.
+        constraints = candidate.get("monotone_constraints") or ()
+        if isinstance(constraints, dict):
+            raise ValueError("Use positional monotone_constraints (tuple/string); named constraints require feature metadata")
+        if not isinstance(constraints, (str, tuple, list)):
+            raise ValueError("monotone_constraints must be a positional tuple/list/string")
+        width = (len(constraints.strip("()").split(",")) if isinstance(constraints, str) else len(constraints))
+        probe = np.arange(4 * max(1, width), dtype=float).reshape(4, max(1, width))
         try:
             with warnings.catch_warnings(record=True) as caught:
                 warnings.simplefilter("always")
-                xgb.train(native, xgb.DMatrix(np.array([[0.], [1.], [2.], [3.]]),
-                                            label=[0, 1, 0, 1]), num_boost_round=1)
+                xgb.train(native, xgb.DMatrix(probe, label=[0, 1, 0, 1]), num_boost_round=1)
             unused = [str(w.message) for w in caught if "not used" in str(w.message)]
             if unused:
                 raise ValueError("Unknown or unused XGBoost parameter: " + " ".join(unused))
@@ -291,6 +301,9 @@ class DistributedXGBClassifier:
                 raise RuntimeError(f"Worker participation verification failed: {self.worker_evidence_}")
             # Convert to a plain sklearn wrapper: no client, futures, or cluster in artifact.
             local = xgb.XGBClassifier(**{k: v for k, v in self.params.items() if k != "callbacks"})
+            # Native model reload resets training-only options to defaults. Retain
+            # the actual training configuration for experiment reporting.
+            local.training_booster_config_ = json.loads(trained.get_booster().save_config())
             local.load_model(bytearray(trained.get_booster().save_raw(raw_format="ubj")))
             return local
         finally:

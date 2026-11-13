@@ -1,0 +1,15 @@
+{
+  "configurations": 4,
+  "samples": 2000,
+  "train_samples": 1600,
+  "validation_samples": 400,
+  "identical_splits_verified": true,
+  "csv_matches_json": true,
+  "terminal_report_matches_json": true,
+  "all_total_thread_budgets": 2,
+  "dask_workers_verified": {
+    "dask_two_workers": 2,
+    "dask_one_worker": 1
+  },
+  "chart_created": true
+}

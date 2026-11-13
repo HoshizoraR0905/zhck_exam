@@ -1,0 +1,15 @@
+User-defined XGBoost comparison (2 configurations)
+Samples: 569 | Input features: 30 | Identical split: 398 train / 171 validation | Model/split seed: 42
+
+                Name   Mode  Train AUC  Train Acc  Train F1  Val AUC  Val Acc   Val F1 Fit (s)
+breast_cancer_single single   1.000000   1.000000  1.000000 0.995619 0.959064 0.967742   0.076
+  breast_cancer_dask   dask   1.000000   1.000000  1.000000 0.995619 0.959064 0.967742   0.538
+
+Model complexity and execution resources
+                Name  Workers  Threads/worker  Total threads  features  rounds  trees  nodes  leaves
+breast_cancer_single        1               4              4        30     100    100   1066     583
+  breast_cancer_dask        2               2              4        30     100    100   1066     583
+
+Scores: 0–1. Fit time: seconds, excluding cluster startup and preprocessing.
+Complexity counts describe all stored trees, including trees retained after early stopping.
+Rows follow input order; no configuration is selected automatically.

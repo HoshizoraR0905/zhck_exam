@@ -1,0 +1,450 @@
+{
+  "dataset": {
+    "source": "csv",
+    "path": "data/covertype_binary.csv",
+    "target_column": "target",
+    "feature_columns": [
+      "Elevation",
+      "Aspect",
+      "Slope",
+      "Horizontal_Distance_To_Hydrology",
+      "Vertical_Distance_To_Hydrology",
+      "Horizontal_Distance_To_Roadways",
+      "Hillshade_9am",
+      "Hillshade_Noon",
+      "Hillshade_3pm",
+      "Horizontal_Distance_To_Fire_Points",
+      "Wilderness_Area_0",
+      "Wilderness_Area_1",
+      "Wilderness_Area_2",
+      "Wilderness_Area_3",
+      "Soil_Type_0",
+      "Soil_Type_1",
+      "Soil_Type_2",
+      "Soil_Type_3",
+      "Soil_Type_4",
+      "Soil_Type_5",
+      "Soil_Type_6",
+      "Soil_Type_7",
+      "Soil_Type_8",
+      "Soil_Type_9",
+      "Soil_Type_10",
+      "Soil_Type_11",
+      "Soil_Type_12",
+      "Soil_Type_13",
+      "Soil_Type_14",
+      "Soil_Type_15",
+      "Soil_Type_16",
+      "Soil_Type_17",
+      "Soil_Type_18",
+      "Soil_Type_19",
+      "Soil_Type_20",
+      "Soil_Type_21",
+      "Soil_Type_22",
+      "Soil_Type_23",
+      "Soil_Type_24",
+      "Soil_Type_25",
+      "Soil_Type_26",
+      "Soil_Type_27",
+      "Soil_Type_28",
+      "Soil_Type_29",
+      "Soil_Type_30",
+      "Soil_Type_31",
+      "Soil_Type_32",
+      "Soil_Type_33",
+      "Soil_Type_34",
+      "Soil_Type_35",
+      "Soil_Type_36",
+      "Soil_Type_37",
+      "Soil_Type_38",
+      "Soil_Type_39"
+    ],
+    "samples": 581012,
+    "features": 54,
+    "test_size": 0.3,
+    "sha256": "955061c9d17ae2ca5a236c177f2ac43a09fc308b25fd7a0567809968fea8ae70",
+    "generation_seconds": 1.0778970000101253,
+    "train_samples": 406708,
+    "validation_samples": 174304
+  },
+  "environment": {
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.10.4",
+    "logical_cpus": 8,
+    "packages": {
+      "xgboost": "3.2.0",
+      "dask": "2026.8.0",
+      "distributed": "2026.8.0",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2"
+    }
+  },
+  "shared_params": {
+    "learning_rate": 0.1,
+    "max_depth": 5,
+    "n_estimators": 200,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "min_child_weight": 1.0,
+    "gamma": 0.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "max_bin": 512,
+    "random_state": 42,
+    "device": "cpu",
+    "eval_metric": "logloss"
+  },
+  "total_training_threads": 4,
+  "configuration": {
+    "model": {
+      "learning_rate": 0.1,
+      "max_depth": 5,
+      "n_estimators": 200,
+      "subsample": 1.0,
+      "colsample_bytree": 1.0,
+      "min_child_weight": 1.0,
+      "gamma": 0.0,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "objective": "binary:logistic",
+      "tree_method": "hist",
+      "max_bin": 512,
+      "random_state": 42,
+      "device": "cpu",
+      "eval_metric": "logloss"
+    },
+    "distributed": {
+      "n_workers": 2,
+      "total_threads": 4,
+      "memory_limit": "auto",
+      "threads_per_worker": 2
+    },
+    "experiment": {
+      "samples": 200000,
+      "n_features": 30,
+      "n_informative": 20,
+      "n_redundant": 5,
+      "n_repeated": 0,
+      "n_classes": 2,
+      "n_clusters_per_class": 2,
+      "class_sep": 1.0,
+      "flip_y": 0.01,
+      "weights": null,
+      "seed": 42,
+      "model_seed": 42,
+      "test_size": 0.3,
+      "append_constant": true
+    },
+    "feature_reduction": null,
+    "dataset": {
+      "source": "csv",
+      "path": "data/covertype_binary.csv",
+      "target_column": "target"
+    }
+  },
+  "workers": 2,
+  "runs": {
+    "single": {
+      "metrics": {
+        "accuracy": 0.831885671011566,
+        "precision": 0.8087786809798942,
+        "recall": 0.8581009530533004,
+        "f1": 0.8327101043028493,
+        "auc_roc": 0.9186815141566046
+      },
+      "timings": {
+        "preprocessing_seconds": 0.16041845898143947,
+        "cluster_startup_seconds": 0.0,
+        "data_distribution_seconds": 0.0,
+        "fit_seconds": 2.986483209009748
+      },
+      "train_total_seconds": 3.349124917003792,
+      "n_jobs": 4,
+      "effective_params": {
+        "learning_rate": 0.1,
+        "max_depth": 5,
+        "n_estimators": 200,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "min_child_weight": 1.0,
+        "gamma": 0.0,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0,
+        "objective": "binary:logistic",
+        "tree_method": "hist",
+        "max_bin": 512,
+        "random_state": 42,
+        "n_jobs": 4,
+        "device": "cpu",
+        "eval_metric": "logloss"
+      },
+      "distributed_config": null,
+      "native_booster_config": {
+        "learner": {
+          "generic_param": {
+            "device": "cpu",
+            "fail_on_invalid_gpu_id": "0",
+            "n_jobs": "4",
+            "nthread": "4",
+            "random_state": "42",
+            "seed": "42",
+            "seed_per_iteration": "0",
+            "validate_parameters": "1"
+          },
+          "gradient_booster": {
+            "gbtree_model_param": {
+              "num_parallel_tree": "1",
+              "num_trees": "200"
+            },
+            "gbtree_train_param": {
+              "process_type": "default",
+              "tree_method": "hist",
+              "updater": "grow_quantile_histmaker",
+              "updater_seq": "grow_quantile_histmaker"
+            },
+            "name": "gbtree",
+            "specified_updater": false,
+            "tree_train_param": {
+              "alpha": "0",
+              "colsample_bylevel": "1",
+              "colsample_bynode": "1",
+              "colsample_bytree": "1",
+              "eta": "0.100000001",
+              "gamma": "0",
+              "grow_policy": "depthwise",
+              "interaction_constraints": "",
+              "lambda": "1",
+              "learning_rate": "0.100000001",
+              "max_bin": "512",
+              "max_cat_threshold": "64",
+              "max_cat_to_onehot": "4",
+              "max_delta_step": "0",
+              "max_depth": "5",
+              "max_leaves": "0",
+              "min_child_weight": "1",
+              "min_split_loss": "0",
+              "monotone_constraints": "()",
+              "refresh_leaf": "1",
+              "reg_alpha": "0",
+              "reg_lambda": "1",
+              "sampling_method": "uniform",
+              "sparse_threshold": "0.20000000000000001",
+              "subsample": "1"
+            },
+            "updater": [
+              {
+                "hist_train_param": {
+                  "debug_synchronize": "0",
+                  "max_cached_hist_node": "18446744073709551615"
+                },
+                "name": "grow_quantile_histmaker"
+              }
+            ]
+          },
+          "learner_model_param": {
+            "base_score": "[4.8760045E-1]",
+            "boost_from_average": "1",
+            "num_class": "0",
+            "num_feature": "54",
+            "num_target": "1"
+          },
+          "learner_train_param": {
+            "booster": "gbtree",
+            "disable_default_eval_metric": "0",
+            "multi_strategy": "one_output_per_tree",
+            "objective": "binary:logistic"
+          },
+          "metrics": [
+            {
+              "name": "logloss"
+            }
+          ],
+          "objective": {
+            "name": "binary:logistic",
+            "reg_loss_param": {
+              "scale_pos_weight": "1"
+            }
+          }
+        },
+        "version": [
+          3,
+          2,
+          0
+        ]
+      },
+      "transformed_features": 54,
+      "worker_evidence": [],
+      "reload_max_probability_difference": 0.0,
+      "reload_verified": true
+    },
+    "dask": {
+      "metrics": {
+        "accuracy": 0.8309792087387553,
+        "precision": 0.8086830841069542,
+        "recall": 0.8558300976585481,
+        "f1": 0.8315888758681796,
+        "auc_roc": 0.9175656683954523
+      },
+      "timings": {
+        "preprocessing_seconds": 0.16364612500183284,
+        "cluster_startup_seconds": 2.3332567919860594,
+        "data_distribution_seconds": 0.11693933297647163,
+        "fit_seconds": 3.9571047500357963
+      },
+      "train_total_seconds": 7.639617083012126,
+      "n_jobs": 2,
+      "effective_params": {
+        "learning_rate": 0.1,
+        "max_depth": 5,
+        "n_estimators": 200,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "min_child_weight": 1.0,
+        "gamma": 0.0,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0,
+        "objective": "binary:logistic",
+        "tree_method": "hist",
+        "max_bin": 512,
+        "random_state": 42,
+        "n_jobs": 2,
+        "device": "cpu",
+        "eval_metric": "logloss"
+      },
+      "distributed_config": {
+        "n_workers": 2,
+        "memory_limit": "auto",
+        "threads_per_worker": 2
+      },
+      "native_booster_config": {
+        "learner": {
+          "generic_param": {
+            "device": "cpu",
+            "fail_on_invalid_gpu_id": "0",
+            "n_jobs": "2",
+            "nthread": "2",
+            "random_state": "42",
+            "seed": "42",
+            "seed_per_iteration": "0",
+            "validate_parameters": "1"
+          },
+          "gradient_booster": {
+            "gbtree_model_param": {
+              "num_parallel_tree": "1",
+              "num_trees": "200"
+            },
+            "gbtree_train_param": {
+              "process_type": "default",
+              "tree_method": "hist",
+              "updater": "grow_quantile_histmaker",
+              "updater_seq": "grow_quantile_histmaker"
+            },
+            "name": "gbtree",
+            "specified_updater": false,
+            "tree_train_param": {
+              "alpha": "0",
+              "colsample_bylevel": "1",
+              "colsample_bynode": "1",
+              "colsample_bytree": "1",
+              "eta": "0.100000001",
+              "gamma": "0",
+              "grow_policy": "depthwise",
+              "interaction_constraints": "",
+              "lambda": "1",
+              "learning_rate": "0.100000001",
+              "max_bin": "512",
+              "max_cat_threshold": "64",
+              "max_cat_to_onehot": "4",
+              "max_delta_step": "0",
+              "max_depth": "5",
+              "max_leaves": "0",
+              "min_child_weight": "1",
+              "min_split_loss": "0",
+              "monotone_constraints": "()",
+              "refresh_leaf": "1",
+              "reg_alpha": "0",
+              "reg_lambda": "1",
+              "sampling_method": "uniform",
+              "sparse_threshold": "0.20000000000000001",
+              "subsample": "1"
+            },
+            "updater": [
+              {
+                "hist_train_param": {
+                  "debug_synchronize": "0",
+                  "max_cached_hist_node": "18446744073709551615"
+                },
+                "name": "grow_quantile_histmaker"
+              }
+            ]
+          },
+          "learner_model_param": {
+            "base_score": "[4.8760045E-1]",
+            "boost_from_average": "1",
+            "num_class": "0",
+            "num_feature": "54",
+            "num_target": "1"
+          },
+          "learner_train_param": {
+            "booster": "gbtree",
+            "disable_default_eval_metric": "0",
+            "multi_strategy": "one_output_per_tree",
+            "objective": "binary:logistic"
+          },
+          "metrics": [
+            {
+              "name": "logloss"
+            }
+          ],
+          "objective": {
+            "name": "binary:logistic",
+            "reg_loss_param": {
+              "scale_pos_weight": "1"
+            }
+          }
+        },
+        "version": [
+          3,
+          2,
+          0
+        ]
+      },
+      "transformed_features": 54,
+      "worker_evidence": [
+        {
+          "address": "tcp://127.0.0.1:49193",
+          "pid": 22570,
+          "rank": 1,
+          "world_size": 2
+        },
+        {
+          "address": "tcp://127.0.0.1:49194",
+          "pid": 22569,
+          "rank": 0,
+          "world_size": 2
+        }
+      ],
+      "reload_max_probability_difference": 0.0,
+      "reload_verified": true
+    }
+  },
+  "comparison": {
+    "identical_split": true,
+    "label_agreement": 0.9777285661832201,
+    "probability_abs_difference_mean": 0.020581994205713272,
+    "probability_abs_difference_max": 0.3896613121032715,
+    "probability_abs_difference_p95": 0.06672026962041855,
+    "fit_speedup_single_over_dask": 0.7547142159890339,
+    "metric_dask_minus_single": {
+      "accuracy": -0.0009064622728106597,
+      "precision": -9.559687294002917e-05,
+      "recall": -0.002270855394752247,
+      "f1": -0.0011212284346696633,
+      "auc_roc": -0.001115845761152312
+    }
+  }
+}

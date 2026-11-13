@@ -1,0 +1,101 @@
+{
+  "historical_result_files_unchanged": 67,
+  "exam_and_original_zip_unchanged": true,
+  "training_logic_unchanged_except_diagnostic_capture": [
+    "__init__",
+    "feature_reduction",
+    "_array",
+    "train",
+    "_train_dask",
+    "_require_fitted",
+    "_transform",
+    "predict_proba",
+    "predict",
+    "evaluate",
+    "_plots",
+    "save_model",
+    "load_model"
+  ],
+  "dask_training_metadata_preserved_before_local_reload": true,
+  "tests_passed": 93,
+  "demonstrations": {
+    "compare_demo": {
+      "samples": 600,
+      "input_features": 14,
+      "output_features": 5,
+      "data_seed": 17,
+      "model_split_seed": 23,
+      "train_samples": 450,
+      "validation_samples": 150,
+      "colsample": [
+        0.8,
+        0.75,
+        0.6
+      ],
+      "native_training_sampling_verified": true,
+      "workers_verified": 2,
+      "dataset_hash_matches_regeneration": true,
+      "report_matches_json": true,
+      "validation_metrics": {
+        "single": {
+          "accuracy": 0.7733333333333333,
+          "precision": 0.8571428571428571,
+          "recall": 0.4444444444444444,
+          "f1": 0.5853658536585366,
+          "auc_roc": 0.8995949074074073
+        },
+        "dask": {
+          "accuracy": 0.7733333333333333,
+          "precision": 0.8571428571428571,
+          "recall": 0.4444444444444444,
+          "f1": 0.5853658536585366,
+          "auc_roc": 0.8995949074074073
+        }
+      }
+    },
+    "models_demo": {
+      "samples": 600,
+      "input_features": 13,
+      "output_features": 12,
+      "data_seed": 17,
+      "model_split_seed": 23,
+      "train_samples": 450,
+      "validation_samples": 150,
+      "colsample": [
+        0.8,
+        0.75,
+        0.6
+      ],
+      "native_training_sampling_verified": true,
+      "workers_verified": 2,
+      "dataset_hash_matches_regeneration": true,
+      "report_matches_json": true,
+      "validation_metrics": {
+        "single": {
+          "accuracy": 0.9,
+          "precision": 0.9512195121951219,
+          "recall": 0.75,
+          "f1": 0.8387096774193549,
+          "auc_roc": 0.9581043956043955
+        },
+        "dask": {
+          "accuracy": 0.9,
+          "precision": 0.9512195121951219,
+          "recall": 0.75,
+          "f1": 0.8387096774193549,
+          "auc_roc": 0.9581043956043955
+        }
+      }
+    }
+  },
+  "pca_mean_matches_training_only": true,
+  "new_saved_models_reload_exactly": true,
+  "default_dataset_compatibility_tested": true,
+  "legacy_array_cli_tested": true,
+  "limitations": [
+    "CPU binary classification only",
+    "Model seed also controls splitting",
+    "Dask cross-start numerical variability is unchanged",
+    "Only shared reduction within each comparison"
+  ]
+}

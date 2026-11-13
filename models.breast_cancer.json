@@ -1,0 +1,40 @@
+{
+  "dataset": {
+    "source": "csv",
+    "path": "data/breast_cancer.csv",
+    "target_column": "target"
+  },
+  "experiment": {
+    "model_seed": 42,
+    "test_size": 0.3
+  },
+  "feature_reduction": {
+    "enabled": false
+  },
+  "models": [
+    {
+      "name": "breast_cancer_single",
+      "framework": "single",
+      "model": {
+        "max_depth": 4,
+        "n_estimators": 100,
+        "learning_rate": 0.1,
+        "n_jobs": 4
+      }
+    },
+    {
+      "name": "breast_cancer_dask",
+      "framework": "dask",
+      "model": {
+        "max_depth": 4,
+        "n_estimators": 100,
+        "learning_rate": 0.1,
+        "n_jobs": 2
+      },
+      "distributed": {
+        "n_workers": 2,
+        "threads_per_worker": 2
+      }
+    }
+  ]
+}

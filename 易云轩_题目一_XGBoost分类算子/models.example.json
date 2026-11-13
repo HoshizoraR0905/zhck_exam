@@ -1,0 +1,90 @@
+{
+  "dataset": {
+    "source": "synthetic"
+  },
+  "experiment": {
+    "samples": 200000,
+    "n_features": 30,
+    "n_informative": 15,
+    "n_redundant": 5,
+    "n_repeated": 5,
+    "n_classes": 2,
+    "n_clusters_per_class": 2,
+    "class_sep": 1.0,
+    "flip_y": 0.01,
+    "weights": null,
+    "seed": 42,
+    "model_seed": 42,
+    "test_size": 0.3,
+    "append_constant": false
+  },
+  "feature_reduction": {
+    "enabled": true,
+    "method": "variance_threshold",
+    "threshold": 0.05
+  },
+  "models": [
+    {
+      "name": "single_deeper",
+      "framework": "single",
+      "model": {
+        "max_depth": 5,
+        "n_estimators": 200,
+        "n_jobs": 4,
+        "colsample_bytree": 1.0,
+        "colsample_bylevel": 1.0,
+        "colsample_bynode": 1.0
+      }
+    },
+    {
+      "name": "dask_two_workers",
+      "framework": "dask",
+      "model": {
+        "max_depth": 5,
+        "n_estimators": 200,
+        "n_jobs": 2,
+        "colsample_bytree": 1.0,
+        "colsample_bylevel": 1.0,
+        "colsample_bynode": 1.0
+      },
+      "distributed": {
+        "n_workers": 2,
+        "threads_per_worker": 2
+      }
+    },
+    {
+      "name": "dask_two_workers_LR_0.05",
+      "framework": "dask",
+      "model": {
+        "learning_rate": 0.05,
+        "max_depth": 5,
+        "n_estimators": 200,
+        "n_jobs": 2,
+        "colsample_bytree": 1.0,
+        "colsample_bylevel": 1.0,
+        "colsample_bynode": 1.0
+      },
+      "distributed": {
+        "n_workers": 2,
+        "threads_per_worker": 2
+      }
+    },
+    {
+      "name": "dask_two_workers_reg_lambda_2",
+      "framework": "dask",
+      "model": {
+        "reg_lambda": 2,
+        "max_depth": 5,
+        "n_estimators": 200,
+        "n_jobs": 2,
+        "colsample_bytree": 1.0,
+        "colsample_bylevel": 1.0,
+        "colsample_bynode": 1.0
+      },
+      "distributed": {
+        "n_workers": 2,
+        "threads_per_worker": 2
+      }
+    }
+  ]
+}

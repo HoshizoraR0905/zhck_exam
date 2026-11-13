@@ -1,0 +1,55 @@
+{
+  "experiment": {
+    "n_samples": 600,
+    "n_features": 12,
+    "n_informative": 6,
+    "n_redundant": 2,
+    "n_repeated": 1,
+    "n_classes": 2,
+    "class_sep": 1.5,
+    "flip_y": 0.02,
+    "weights": [
+      0.65,
+      0.35
+    ],
+    "random_state": 17,
+    "model_seed": 23,
+    "test_size": 0.25,
+    "append_constant": true
+  },
+  "feature_reduction": {
+    "enabled": true,
+    "method": "variance_threshold",
+    "threshold": 0.0
+  },
+  "models": [
+    {
+      "name": "single",
+      "framework": "single",
+      "model": {
+        "n_estimators": 10,
+        "max_depth": 3,
+        "colsample_bytree": 0.8,
+        "colsample_bylevel": 0.75,
+        "colsample_bynode": 0.6,
+        "n_jobs": 2
+      }
+    },
+    {
+      "name": "dask",
+      "framework": "dask",
+      "model": {
+        "n_estimators": 10,
+        "max_depth": 3,
+        "colsample_bytree": 0.8,
+        "colsample_bylevel": 0.75,
+        "colsample_bynode": 0.6,
+        "n_jobs": 1
+      },
+      "distributed": {
+        "n_workers": 2,
+        "threads_per_worker": 1
+      }
+    }
+  ]
+}

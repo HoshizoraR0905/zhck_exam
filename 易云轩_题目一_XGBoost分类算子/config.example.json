@@ -1,0 +1,50 @@
+{
+  "dataset": {
+    "source": "synthetic"
+  },
+  "model": {
+    "learning_rate": 0.1,
+    "max_depth": 6,
+    "n_estimators": 100,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "min_child_weight": 1.0,
+    "gamma": 0.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "max_bin": 512,
+    "random_state": 42,
+    "device": "cpu",
+    "eval_metric": "logloss",
+    "colsample_bylevel": 1.0,
+    "colsample_bynode": 1.0
+  },
+  "distributed": {
+    "n_workers": 2,
+    "total_threads": 4,
+    "memory_limit": "auto"
+  },
+  "experiment": {
+    "samples": 200000,
+    "seed": 42,
+    "test_size": 0.2,
+    "n_features": 30,
+    "n_informative": 20,
+    "n_redundant": 5,
+    "n_repeated": 0,
+    "n_classes": 2,
+    "n_clusters_per_class": 2,
+    "class_sep": 1.0,
+    "flip_y": 0.01,
+    "weights": null,
+    "model_seed": 42,
+    "append_constant": true
+  },
+  "feature_reduction": {
+    "enabled": true,
+    "method": "variance_threshold",
+    "threshold": 0.0
+  }
+}

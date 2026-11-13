@@ -1,0 +1,8 @@
+[19:27:21] Task [xgboost.dask-0]:tcp://127.0.0.1:54795 got rank 0
+[19:27:21] Task [xgboost.dask-1]:tcp://127.0.0.1:54796 got rank 1
+[19:30:34] Task [xgboost.dask-0]:tcp://127.0.0.1:55427 got rank 0
+[19:30:34] Task [xgboost.dask-1]:tcp://127.0.0.1:55428 got rank 1
+[19:33:36] Task [xgboost.dask-0]:tcp://127.0.0.1:55964 got rank 0[19:33:36] Task [xgboost.dask-1]:tcp://127.0.0.1:55963 got rank 1
+
+[19:37:35] Task [xgboost.dask-0]:tcp://127.0.0.1:56659 got rank 0
+[19:37:35] Task [xgboost.dask-1]:tcp://127.0.0.1:56660 got rank 1

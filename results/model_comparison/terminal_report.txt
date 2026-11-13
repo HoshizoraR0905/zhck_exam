@@ -1,0 +1,20 @@
+User-defined XGBoost comparison (4 configurations)
+Samples: 200,000 | Input features: 30 | Identical split: 140,000 train / 60,000 validation | Model/split seed: 42
+Data seed: 42
+
+                         Name   Mode  Train AUC  Train Acc  Train F1  Val AUC  Val Acc   Val F1 Fit (s)
+                single_deeper single   0.994728   0.976471  0.976510 0.992542 0.970733 0.970764   1.563
+             dask_two_workers   dask   0.994862   0.977350  0.977391 0.992656 0.971067 0.971089   2.806
+     dask_two_workers_LR_0.05   dask   0.992232   0.967186  0.967284 0.990551 0.961533 0.961595   2.837
+dask_two_workers_reg_lambda_2   dask   0.994793   0.977300  0.977334 0.992659 0.971267 0.971275   2.600
+
+Model complexity and execution resources
+                         Name  Workers  Threads/worker  Total threads  features  rounds  trees  nodes  leaves
+                single_deeper        1               4              4        30     200    200  11720    5960
+             dask_two_workers        2               2              4        30     200    200  11748    5974
+     dask_two_workers_LR_0.05        2               2              4        30     200    200  12476    6338
+dask_two_workers_reg_lambda_2        2               2              4        30     200    200  11904    6052
+
+Scores: 0–1. Fit time: seconds, excluding cluster startup and preprocessing.
+Complexity counts describe all stored trees, including trees retained after early stopping.
+Rows follow input order; no configuration is selected automatically.

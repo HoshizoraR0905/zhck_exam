@@ -1,0 +1,36 @@
+{
+  "experiment": {
+    "n_samples": 600,
+    "n_features": 14,
+    "n_informative": 7,
+    "n_redundant": 3,
+    "n_repeated": 1,
+    "n_classes": 2,
+    "class_sep": 1.5,
+    "flip_y": 0.02,
+    "weights": [
+      0.65,
+      0.35
+    ],
+    "random_state": 17,
+    "model_seed": 23,
+    "test_size": 0.25,
+    "append_constant": false
+  },
+  "feature_reduction": {
+    "enabled": true,
+    "method": "pca",
+    "n_components": 5
+  },
+  "model": {
+    "n_estimators": 10,
+    "max_depth": 3,
+    "colsample_bytree": 0.8,
+    "colsample_bylevel": 0.75,
+    "colsample_bynode": 0.6
+  },
+  "distributed": {
+    "n_workers": 2,
+    "total_threads": 2
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "terminal_matches_saved_json": true,
+  "effective_params_match_historical_models": true,
+  "n_jobs_matches_threads_per_worker": true,
+  "workers_verified": 4,
+  "original_tracked_result_files_unchanged": true,
+  "original_tests_unchanged": true,
+  "operator_methods_unchanged_except_validation": [
+    "__init__",
+    "feature_reduction",
+    "_array",
+    "train",
+    "_train_dask",
+    "_require_fitted",
+    "_transform",
+    "predict_proba",
+    "predict",
+    "evaluate",
+    "_plots",
+    "save_model",
+    "load_model"
+  ],
+  "visualization_code_unchanged": true,
+  "dataset_sha256_unchanged": true,
+  "same_validation_indices_and_labels": true,
+  "single_probabilities_identical_to_historical_and_control": true,
+  "dask_new_vs_historical_max_probability_difference": 0.3923984169960022,
+  "dask_original_script_replay_vs_historical_max_probability_difference": 0.37983885407447815,
+  "dask_new_vs_original_script_replay_max_probability_difference": 0.4078352451324463,
+  "reload_verified": {
+    "single": true,
+    "dask": true
+  },
+  "limitation": "Dask cross-run predictions vary in the existing training strategy. Historical artifacts remain unchanged. No attempt was made to force equivalence."
+}

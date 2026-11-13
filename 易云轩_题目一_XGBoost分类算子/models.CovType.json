@@ -1,0 +1,63 @@
+{
+  "dataset": {
+    "source": "csv",
+    "path": "data/covertype_binary.csv",
+    "target_column": "target"
+  },
+  "experiment": {
+    "model_seed": 42,
+    "test_size": 0.3
+  },
+  "feature_reduction": {
+    "enabled": false
+  },
+  "models": [
+    {
+      "name": "covtype_single",
+      "framework": "single",
+      "model": {
+        "max_depth": 5,
+        "n_estimators": 200,
+        "learning_rate": 0.1,
+        "n_jobs": 4,
+        "tree_method": "hist",
+        "max_bin": 512,
+        "colsample_bytree": 1.0
+      }
+    },
+    {
+      "name": "covtype_dask_2_workers",
+      "framework": "dask",
+      "model": {
+        "max_depth": 5,
+        "n_estimators": 200,
+        "learning_rate": 0.1,
+        "n_jobs": 2,
+        "tree_method": "hist",
+        "max_bin": 512,
+        "colsample_bytree": 1.0
+      },
+      "distributed": {
+        "n_workers": 2,
+        "threads_per_worker": 2
+      }
+    },
+    {
+      "name": "covtype_dask_4_workers",
+      "framework": "dask",
+      "model": {
+        "max_depth": 5,
+        "n_estimators": 200,
+        "learning_rate": 0.1,
+        "n_jobs": 1,
+        "tree_method": "hist",
+        "max_bin": 512,
+        "colsample_bytree": 1.0
+      },
+      "distributed": {
+        "n_workers": 4,
+        "threads_per_worker": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "dataset": {
+    "source": "csv",
+    "path": "data/covertype_binary.csv",
+    "target_column": "target"
+  },
+  "experiment": {
+    "model_seed": 42,
+    "test_size": 0.3
+  },
+  "feature_reduction": {
+    "enabled": false
+  },
+  "model": {
+    "max_depth": 5,
+    "n_estimators": 200,
+    "learning_rate": 0.1,
+    "tree_method": "hist",
+    "max_bin": 512,
+    "colsample_bytree": 1.0
+  },
+  "distributed": {
+    "n_workers": 2,
+    "total_threads": 4
+  }
+}

@@ -1,0 +1,4 @@
+Scheduler: tcp://127.0.0.1:57883
+Workers ready: 2/2 | Threads per worker: 1
+Stop with Ctrl-C.
+Exit code: 0

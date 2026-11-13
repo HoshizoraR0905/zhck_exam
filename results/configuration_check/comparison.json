@@ -1,0 +1,384 @@
+{
+  "dataset": {
+    "source": "sklearn.datasets.make_classification",
+    "samples": 200000,
+    "features": 31,
+    "seed": 42,
+    "test_size": 0.2,
+    "sha256": "336d4740c50e97cb871d73483f49c65ed287354a59aa49f8fc61084da5d56f83",
+    "generation_seconds": 0.20624749999842606,
+    "train_samples": 160000,
+    "validation_samples": 40000
+  },
+  "environment": {
+    "platform": "macOS-26.3.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "python": "3.10.4",
+    "logical_cpus": 8,
+    "packages": {
+      "xgboost": "3.2.0",
+      "dask": "2026.8.0",
+      "distributed": "2026.8.0",
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.7.2"
+    }
+  },
+  "shared_params": {
+    "learning_rate": 0.1,
+    "max_depth": 6,
+    "n_estimators": 100,
+    "subsample": 1.0,
+    "colsample_bytree": 1.0,
+    "min_child_weight": 1.0,
+    "gamma": 0.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 1.0,
+    "objective": "binary:logistic",
+    "tree_method": "hist",
+    "max_bin": 512,
+    "random_state": 42,
+    "device": "cpu",
+    "eval_metric": "logloss"
+  },
+  "total_training_threads": 4,
+  "configuration": {
+    "model": {
+      "learning_rate": 0.1,
+      "max_depth": 6,
+      "n_estimators": 100,
+      "subsample": 1.0,
+      "colsample_bytree": 1.0,
+      "min_child_weight": 1.0,
+      "gamma": 0.0,
+      "reg_alpha": 0.0,
+      "reg_lambda": 1.0,
+      "objective": "binary:logistic",
+      "tree_method": "hist",
+      "max_bin": 512,
+      "random_state": 42,
+      "device": "cpu",
+      "eval_metric": "logloss"
+    },
+    "distributed": {
+      "n_workers": 4,
+      "total_threads": 4,
+      "memory_limit": "auto",
+      "threads_per_worker": 1
+    },
+    "experiment": {
+      "samples": 200000,
+      "seed": 42,
+      "test_size": 0.2
+    }
+  },
+  "workers": 4,
+  "runs": {
+    "single": {
+      "metrics": {
+        "accuracy": 0.9606,
+        "precision": 0.9644478063540091,
+        "recall": 0.9564412882576515,
+        "f1": 0.9604278611962035,
+        "auc_roc": 0.9906372096254884
+      },
+      "timings": {
+        "preprocessing_seconds": 0.07604412498767488,
+        "cluster_startup_seconds": 0.0,
+        "data_distribution_seconds": 0.0,
+        "fit_seconds": 0.9998394589929376
+      },
+      "train_total_seconds": 1.1701443339989055,
+      "n_jobs": 4,
+      "effective_params": {
+        "learning_rate": 0.1,
+        "max_depth": 6,
+        "n_estimators": 100,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "min_child_weight": 1.0,
+        "gamma": 0.0,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0,
+        "objective": "binary:logistic",
+        "tree_method": "hist",
+        "max_bin": 512,
+        "random_state": 42,
+        "n_jobs": 4,
+        "device": "cpu",
+        "eval_metric": "logloss"
+      },
+      "distributed_config": null,
+      "native_booster_config": {
+        "learner": {
+          "generic_param": {
+            "device": "cpu",
+            "fail_on_invalid_gpu_id": "0",
+            "n_jobs": "4",
+            "nthread": "4",
+            "random_state": "42",
+            "seed": "42",
+            "seed_per_iteration": "0",
+            "validate_parameters": "1"
+          },
+          "gradient_booster": {
+            "gbtree_model_param": {
+              "num_parallel_tree": "1",
+              "num_trees": "100"
+            },
+            "gbtree_train_param": {
+              "process_type": "default",
+              "tree_method": "hist",
+              "updater": "grow_quantile_histmaker",
+              "updater_seq": "grow_quantile_histmaker"
+            },
+            "name": "gbtree",
+            "specified_updater": false,
+            "tree_train_param": {
+              "alpha": "0",
+              "colsample_bylevel": "1",
+              "colsample_bynode": "1",
+              "colsample_bytree": "1",
+              "eta": "0.100000001",
+              "gamma": "0",
+              "grow_policy": "depthwise",
+              "interaction_constraints": "",
+              "lambda": "1",
+              "learning_rate": "0.100000001",
+              "max_bin": "512",
+              "max_cat_threshold": "64",
+              "max_cat_to_onehot": "4",
+              "max_delta_step": "0",
+              "max_depth": "6",
+              "max_leaves": "0",
+              "min_child_weight": "1",
+              "min_split_loss": "0",
+              "monotone_constraints": "()",
+              "refresh_leaf": "1",
+              "reg_alpha": "0",
+              "reg_lambda": "1",
+              "sampling_method": "uniform",
+              "sparse_threshold": "0.20000000000000001",
+              "subsample": "1"
+            },
+            "updater": [
+              {
+                "hist_train_param": {
+                  "debug_synchronize": "0",
+                  "max_cached_hist_node": "18446744073709551615"
+                },
+                "name": "grow_quantile_histmaker"
+              }
+            ]
+          },
+          "learner_model_param": {
+            "base_score": "[4.9990624E-1]",
+            "boost_from_average": "1",
+            "num_class": "0",
+            "num_feature": "30",
+            "num_target": "1"
+          },
+          "learner_train_param": {
+            "booster": "gbtree",
+            "disable_default_eval_metric": "0",
+            "multi_strategy": "one_output_per_tree",
+            "objective": "binary:logistic"
+          },
+          "metrics": [
+            {
+              "name": "logloss"
+            }
+          ],
+          "objective": {
+            "name": "binary:logistic",
+            "reg_loss_param": {
+              "scale_pos_weight": "1"
+            }
+          }
+        },
+        "version": [
+          3,
+          2,
+          0
+        ]
+      },
+      "transformed_features": 30,
+      "worker_evidence": [],
+      "reload_max_probability_difference": 0.0,
+      "reload_verified": true
+    },
+    "dask": {
+      "metrics": {
+        "accuracy": 0.95965,
+        "precision": 0.9635831736104106,
+        "recall": 0.9553910782156432,
+        "f1": 0.9594696398975441,
+        "auc_roc": 0.990442977117719
+      },
+      "timings": {
+        "preprocessing_seconds": 0.06538250000448897,
+        "cluster_startup_seconds": 2.156615374988178,
+        "data_distribution_seconds": 0.0868706250039395,
+        "fit_seconds": 3.138696334004635
+      },
+      "train_total_seconds": 6.282818167004734,
+      "n_jobs": 1,
+      "effective_params": {
+        "learning_rate": 0.1,
+        "max_depth": 6,
+        "n_estimators": 100,
+        "subsample": 1.0,
+        "colsample_bytree": 1.0,
+        "min_child_weight": 1.0,
+        "gamma": 0.0,
+        "reg_alpha": 0.0,
+        "reg_lambda": 1.0,
+        "objective": "binary:logistic",
+        "tree_method": "hist",
+        "max_bin": 512,
+        "random_state": 42,
+        "n_jobs": 1,
+        "device": "cpu",
+        "eval_metric": "logloss"
+      },
+      "distributed_config": {
+        "n_workers": 4,
+        "memory_limit": "auto",
+        "threads_per_worker": 1
+      },
+      "native_booster_config": {
+        "learner": {
+          "generic_param": {
+            "device": "cpu",
+            "fail_on_invalid_gpu_id": "0",
+            "n_jobs": "1",
+            "nthread": "1",
+            "random_state": "0",
+            "seed": "0",
+            "seed_per_iteration": "0",
+            "validate_parameters": "1"
+          },
+          "gradient_booster": {
+            "gbtree_model_param": {
+              "num_parallel_tree": "1",
+              "num_trees": "100"
+            },
+            "gbtree_train_param": {
+              "process_type": "default",
+              "tree_method": "auto",
+              "updater": "grow_quantile_histmaker",
+              "updater_seq": "grow_quantile_histmaker"
+            },
+            "name": "gbtree",
+            "specified_updater": false,
+            "tree_train_param": {
+              "alpha": "0",
+              "colsample_bylevel": "1",
+              "colsample_bynode": "1",
+              "colsample_bytree": "1",
+              "eta": "0.300000012",
+              "gamma": "0",
+              "grow_policy": "depthwise",
+              "interaction_constraints": "",
+              "lambda": "1",
+              "learning_rate": "0.300000012",
+              "max_bin": "256",
+              "max_cat_threshold": "64",
+              "max_cat_to_onehot": "4",
+              "max_delta_step": "0",
+              "max_depth": "6",
+              "max_leaves": "0",
+              "min_child_weight": "1",
+              "min_split_loss": "0",
+              "monotone_constraints": "()",
+              "refresh_leaf": "1",
+              "reg_alpha": "0",
+              "reg_lambda": "1",
+              "sampling_method": "uniform",
+              "sparse_threshold": "0.20000000000000001",
+              "subsample": "1"
+            },
+            "updater": [
+              {
+                "hist_train_param": {
+                  "debug_synchronize": "0",
+                  "max_cached_hist_node": "18446744073709551615"
+                },
+                "name": "grow_quantile_histmaker"
+              }
+            ]
+          },
+          "learner_model_param": {
+            "base_score": "[4.9990627E-1]",
+            "boost_from_average": "1",
+            "num_class": "0",
+            "num_feature": "30",
+            "num_target": "1"
+          },
+          "learner_train_param": {
+            "booster": "gbtree",
+            "disable_default_eval_metric": "0",
+            "multi_strategy": "one_output_per_tree",
+            "objective": "binary:logistic"
+          },
+          "metrics": [],
+          "objective": {
+            "name": "binary:logistic",
+            "reg_loss_param": {
+              "scale_pos_weight": "1"
+            }
+          }
+        },
+        "version": [
+          3,
+          2,
+          0
+        ]
+      },
+      "transformed_features": 30,
+      "worker_evidence": [
+        {
+          "address": "tcp://127.0.0.1:57553",
+          "pid": 4605,
+          "rank": 2,
+          "world_size": 4
+        },
+        {
+          "address": "tcp://127.0.0.1:57554",
+          "pid": 4603,
+          "rank": 0,
+          "world_size": 4
+        },
+        {
+          "address": "tcp://127.0.0.1:57555",
+          "pid": 4604,
+          "rank": 1,
+          "world_size": 4
+        },
+        {
+          "address": "tcp://127.0.0.1:57556",
+          "pid": 4606,
+          "rank": 3,
+          "world_size": 4
+        }
+      ],
+      "reload_max_probability_difference": 0.0,
+      "reload_verified": true
+    }
+  },
+  "comparison": {
+    "identical_split": true,
+    "label_agreement": 0.9852,
+    "probability_abs_difference_mean": 0.02333506941795349,
+    "probability_abs_difference_max": 0.42530006170272827,
+    "probability_abs_difference_p95": 0.09302135556936264,
+    "fit_speedup_single_over_dask": 0.31855246656412,
+    "metric_dask_minus_single": {
+      "accuracy": -0.0009500000000000064,
+      "precision": -0.0008646327435984924,
+      "recall": -0.0010502100420083371,
+      "f1": -0.0009582212986594119,
+      "auc_roc": -0.0001942325077693985
+    }
+  }
+}

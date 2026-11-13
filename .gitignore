@@ -6,3 +6,6 @@ __pycache__/
 # Additional local virtual environments
 /\#/
 /仅新环境需要/
+
+# Local dataset exceeds GitHub's 100 MiB file limit
+/data/covertype_binary.csv

@@ -1,0 +1,36 @@
+Distributed XGBoost comparison
+========================================================================
+Dataset: 600 samples | 14 input features | 5 after reduction
+Split: 450 train / 150 validation (test_size=0.25)
+Seeds: data=17 | model/split=23
+
+XGBoost parameters (shared):
+  learning_rate=0.1, max_depth=3, n_estimators=10, subsample=1.0, colsample_bytree=0.8,
+  min_child_weight=1.0, gamma=0.0, reg_alpha=0.0, reg_lambda=1.0, objective=binary:logistic,
+  tree_method=hist, max_bin=512, random_state=23, device=cpu, eval_metric=logloss,
+  colsample_bylevel=0.75, colsample_bynode=0.6
+CPU single: 1 process x 2 threads = 2 threads
+CPU Dask:   2 workers x 1 threads = 2 threads
+Dask n_jobs = threads_per_worker = 1
+Workers verified: 2/2
+
+Metric                                      Single            Dask
+------------------------------------------------------------------
+Accuracy                                  0.773333        0.773333
+Precision                                 0.857143        0.857143
+Recall                                    0.444444        0.444444
+F1                                        0.585366        0.585366
+ROC-AUC                                   0.899595        0.899595
+
+Time (seconds)                              Single            Dask
+------------------------------------------------------------------
+Preprocessing                                0.001           0.001
+Cluster startup                              0.000           2.243
+Data distribution                            0.000           0.029
+Fit                                          0.007           0.483
+Total train (includes cleanup)               0.028           3.577
+
+Prediction-label agreement: 100.0000%
+Absolute probability difference: mean=0.00000000 | P95=0.00000000 | maximum=0.00000000
+Training speedup (single fit time / distributed fit time): 0.014x
+Model reload max probability difference: single=0.00000000 | Dask=0.00000000

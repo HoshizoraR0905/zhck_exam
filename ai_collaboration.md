@@ -1,10 +1,8 @@
 # 实际 AI 协作记录
 
-本项目由 Codex 在本次会话中根据用户附件实现、运行和修正。没有虚构人工复审、额外用户轮次或多代理协作。
-以下三条关键提示词是**同一份用户请求中的原文片段**，不是三次独立对话；题库要求“至少3条关键提示词”，
-此处按三项实际指令记录。完整提示词来源为用户附加的 `Pasted text.txt`，原题库为权威规格。
 
-## 1. 初次实现
+
+## 1. Initial Implementation and Validation
 
 ### Task: Implement a Distributed XGBoost Classification Operator
 
@@ -121,41 +119,226 @@ Finally, summarize the created files, executed tests, actual experimental result
 
 Prioritize **correctness, reproducibility, and compliance with the examination requirements** over unnecessary features.
 
+## 2. Configuration Management and Reporting
 
-## 2. 防泄漏与持久化
+Refine the existing Distributed XGBoost project. Focus on standardizing configuration and terminal output. Preserve the current training logic, tests, and numerical results.
+1. Hyperparameter configuration
+- Verify that all valid XGBoost hyperparameters are externally configurable through the existing operator interface.
+- Clearly separate model hyperparameters from distributed execution settings.
+- Provide a simple configuration dictionary or JSON configuration example with sensible defaults.
+- Keep common CLI options such as --total-threads, --n-workers, and --config if appropriate.
+- Ensure n_jobs is consistent with threads_per_worker in Dask mode, avoiding thread oversubscription.
+- Document where users should modify hyperparameters and how configuration overrides work.
+- Do not implement automatic hyperparameter tuning.
+2. Standardize terminal output
+Replace verbose raw JSON printing with a concise, readable comparison report containing:
+- Dataset size, feature count, and train/validation split.
+- XGBoost parameters used for training.
+- Single-machine and distributed CPU/thread configurations.
+- Accuracy, Precision, Recall, F1, and ROC-AUC in a comparison table.
+- Preprocessing time, cluster startup time, data distribution time, fit time, and total time.
+- Prediction-label agreement and probability differences (mean, P95, maximum).
+- Training speedup, clearly defined as single fit time / distributed fit time.
+- Verified number of participating Dask Workers.
+Use consistent decimal precision, units, and labels.
 
-**实际提示词**：“Perform feature reduction only after splitting to prevent data leakage. Fit the reducer on training data and apply the same transformation to validation and future prediction data.”
+Display a brief summary of distributed execution (e.g. Workers verified: 4/4) rather than printing all Worker addresses, PIDs, ranks, and raw JSON objects.
+3. Preserve detailed results
+Continue saving complete machine-readable results to JSON, including:
+- All metrics and timings.
+- Effective hyperparameters.
+- Worker evidence and distributed configuration.
+- Prediction consistency statistics.
+- Model reload verification results.
+Keep existing visualization outputs unchanged.
+4. Validation
+- Do not change the underlying model training or evaluation behavior.
+- Run existing tests and a comparison experiment.
+- Verify that the formatted output matches the saved numerical results.
+- Update README examples and configuration instructions.
+- Report any configuration conflicts or remaining issues.
+Keep changes minimal and avoid unnecessary refactoring.
 
-**意图**：防止把验证数据统计信息用于预处理；保证保存后仍可预测。
+## 3. Multi-Model Comparison Framework
 
-**AI 执行摘要**：将 feature_reduction 定义为配置操作，在 train 切分之后才 fit；
-保存标签编码器、列元数据和降维器。Dask 模型提取为普通本地估计器，关闭集群后验证 reload。
+Add a lightweight compare_models() utility to the existing Distributed XGBoost project.
 
-**验证方式**：测试 reducer 的方差/均值与训练索引对应样本的统计值一致，验证 PCA 两种参数语义、
-原始输入预测、列顺序错误，以及方差筛选/PCA/Dask 保存加载后的概率完全不变。
+The purpose is to compare user-defined XGBoost configurations, not to implement automatic hyperparameter optimization.
 
-## 3. 真实分布式与对比
+Requirements:
+1. Accept a list of named configurations, each specifying the training mode (single or dask), model hyperparameters, and optional Worker settings.
+2. Reuse the existing DistributedXGBClassifier implementation. Do not duplicate training, preprocessing, or evaluation logic.
+3. Ensure all configurations use identical training/validation splits, with preprocessing fitted only on training data.
+4. Support two comparison types:
+   - Different hyperparameters under the same execution mode.
+   - Identical hyperparameters under different execution modes or Worker counts.
+5. Report training and validation ROC-AUC, Accuracy, F1, fit time, and relevant model complexity information.
+6. Provide a concise comparison table, save complete results to CSV/JSON, and optionally generate a training-vs-validation performance chart.
+7. Support configuration input from a JSON file and document the format in README.
+8. Keep the existing single-vs-distributed comparison workflow unchanged.
+9. Add focused tests for split consistency, parameter propagation, and comparison output.
+10. Run the tests and verify the new utility with a small example.
+Avoid exhaustive grid searches, Optuna, unnecessary abstractions, or large-scale experiments. Keep the implementation simple and reusable.
 
-**实际提示词**：“Do not assume the two trained models must be numerically identical. Distributed histogram construction may produce different split thresholds. Report actual differences transparently rather than forcing equivalence.”
+## 4. Experiment Configuration and Feature Engineering
 
-**意图**：验证真正的多 Worker 训练，避免为了满足原题一致性而篡改结果。
+Update the existing Distributed XGBoost project to support comprehensive experiment configuration through config.example.json and models.example.json.
 
-**AI 执行摘要**：在 XGBoost collective 训练结束回调中采集 rank/world_size/PID；
-使用相同 20 万样本和切分，按总线程预算匹配资源，分别记录集群启动、数据分发、fit 耗时。
+Read the existing README and implementation first. Preserve current functionality, training logic, numerical results, and backward compatibility wherever possible. Keep changes minimal.
+1. Data generation configuration
+Allow users to configure the synthetic dataset through JSON in both compare.py and compare_models.py.
 
-**验证方式**：自动测试和完整实验校验 rank 集合、不同进程和 world_size；
-保存双方验证概率与索引，用真实标签一致率和概率差统计评估一致性，结果见 results/report.md。
+Expose relevant sklearn.datasets.make_classification parameters, including:
+- n_samples (retain the existing samples key for compatibility)
+- n_features
+- n_informative
+- n_redundant
+- n_repeated
+- n_classes (binary classification only)
+- class_sep
+- flip_y
+- weights
+- random_state / seed
+- test_size
+Validate parameter combinations and provide clear errors for invalid configurations.
 
-## 实现中的实际调试
+Use the same generated dataset and train/validation split for every model in a comparison.
+2. XGBoost feature sampling
+Explicitly expose and document:
+- colsample_bytree
+- colsample_bylevel
+- colsample_bynode
+All three must be configurable through the existing model dictionaries.
 
-初稿参数探测仅将少量 wrapper 参数送给原生引擎，自检时发现这会漏掉 max_leaves 等值校验，
-在首次测试前改用安装版本的 get_xgb_params() 提取原生参数。
-首次自动测试发现两处错误：未训练 predict 先访问标签编码器，抛出了不清晰的 AttributeError；
-以及禁用全局默认 Client 后，distributed.wait 仍需当前 Client 上下文。
-分别添加显式拟合检查和局部 client.as_current() 上下文，保留首次日志 tests_initial.log 并重跑验证。
-后续补充 early_stopping_rounds 和 importance_type 的错误校验，最终 23 项测试通过。
-另用 start_cluster.py 启动外部进程集群，验证训练后集群仍存活、模型加载预测不变，以及 Ctrl-C 退出码为 0。
-在补充参数校验和重置 Worker 参与证据之后，重新执行 20 万样本实验；两次标签一致率和概率差统计相同，
-报告保留最终执行的实际耗时。另在全新 Python 进程中加载双方模型，核对保存的全部 40,000 个验证概率。
-最终自动测试和实验日志保存在 results/，实际修正以这些日志和源代码为准。
-所有结论来自本次工具运行和官方文档参考，未编造用户反馈或人工优化记录。
+Do not confuse feature sampling with dimensionality reduction. Feature sampling affects which features are considered during tree construction but does not permanently remove input features.
+3. Feature reduction configuration
+Expose the existing feature reduction functionality through both JSON configuration files.
+
+Support:
+- Enable/disable switch.
+- variance_threshold with configurable threshold.
+- pca with configurable n_components.
+Preserve the existing train-only fitting behavior to prevent data leakage.
+
+For compare_models.py, allow a shared feature reduction configuration across all models. Keep comparison datasets and preprocessing consistent unless explicitly comparing different reduction settings.
+4. JSON structure and compatibility
+Extend config.example.json with the new experiment and feature reduction settings.
+
+For models.example.json, support a structure containing:
+- Shared experiment configuration.
+- Shared optional feature_reduction configuration.
+- A models array containing the existing named model configurations.
+Continue accepting the existing top-level JSON array format for backward compatibility.
+
+Preserve the configuration precedence rules: defaults → JSON → explicitly supplied CLI arguments.
+
+Ensure CLI options do not silently override JSON values when omitted.
+5. README documentation
+Update README to clearly explain the meaning and practical effect of every supported configuration variable, not merely its default and allowed range.
+
+Expand the existing parameter table to cover:
+- All documented XGBoost hyperparameters.
+- Feature sampling parameters.
+- Dataset generation parameters.
+- Feature reduction parameters.
+- Distributed execution settings.
+For each variable, include:
+1. Parameter name.
+2. Default value.
+3. Meaning and effect on model training or data generation.
+4. Valid range or constraints.
+Explain the distinction between:
+- n_features and colsample_*.
+- PCA / VarianceThreshold and random feature sampling.
+- max_depth and n_features.
+- n_jobs, threads_per_worker, and n_workers.
+- Dataset random seed and model random seed.
+Include working JSON examples and execution commands for both comparison scripts.
+6. Validation
+Add focused tests for the new configuration options and backward compatibility.
+
+Run the existing test suite and verify that both scripts correctly use the configured data dimensions, random seeds, feature sampling parameters, and feature reduction settings.
+
+Perform at least one small end-to-end demonstration with non-default feature parameters.
+
+Do not overwrite historical results or alter existing trained models.
+
+Summarize the changes, test results, and any remaining limitations.
+
+Avoid unrelated refactoring, automatic hyperparameter optimization, or unnecessary new features.
+
+## 5. Add external dataset support
+
+Add minimal external dataset support to the existing XGBoost comparison scripts.
+
+Read the current implementation and README first.
+
+Requirements:
+1. Add a configurable dataset section to both config.example.json and models.example.json, supporting:
+   - source: "synthetic" (default) or "csv"
+   - path: CSV file path, required when source is "csv"
+   - target_column: target label column, required for CSV
+   - Optional feature_columns: explicitly selected input columns; otherwise use all columns except the target.
+2. Preserve the existing synthetic data generation workflow and all current experiment parameters.
+3. For CSV input, load the dataset using pandas, separate X and y, and pass them to the existing DistributedXGBClassifier without modifying its training algorithm.
+4. Initially support numerical features only, consistent with the current operator contract. Provide clear error messages for missing files, missing target columns, non-numeric features, invalid labels, or unsupported values. Do not introduce automatic feature encoding or a complex preprocessing pipeline.
+5. Ensure compare.py and compare_models.py continue using identical datasets and train/validation splits across configurations.
+6. Preserve all existing feature reduction, model evaluation, visualization, persistence, and distributed training behavior.
+7. Retain backward compatibility: existing JSON files without a dataset section must continue using synthetic data.
+8. Update README with:
+   - How to run synthetic and external CSV datasets.
+   - JSON configuration examples.
+   - Dataset requirements and limitations.
+   - A reproducible command-line example.
+9. Add focused tests for CSV loading, invalid input, reproducible splitting, and backward compatibility. Run the test suite and one small CSV demonstration.
+Do not overwrite historical results or modify unrelated functionality. Keep implementation minimal and reusable.
+
+## 6. Prepare the submission package
+
+Prepare the final submission package for Question 1 (Distributed XGBoost Classification Operator).
+
+Before packaging, read the original examination requirements, README.md, design.md, and ai_collaboration.md to identify the required deliverables.
+
+Requirements:
+
+1. Include all necessary Python source code, configuration examples, dependency files, automated tests, README.md, design.md, ai_collaboration.md, and the final experimental results.
+
+2. Include representative results demonstrating:
+   - Single-machine vs. genuine multi-Worker Dask training.
+   - Classification metrics and required visualizations (confusion matrix, ROC curve with AUC, feature importance).
+   - Training time comparison and distributed Worker verification.
+   - Model persistence and successful reloading.
+   - The final Forest Covertypes experiment (581,012 samples, 54 features, binary classification).
+
+3. Include the comparison screenshot if it already exists. If not, preserve the generated comparison plot and report; do not fabricate screenshots or experimental results.
+
+4. Keep the original examination file unchanged and include it only if required by the submission instructions.
+
+5. Exclude unnecessary development artifacts:
+   - `.venv/`
+   - `__pycache__/`, `.pytest_cache/`
+   - `.git/`
+   - Temporary files and debugging caches.
+   - Duplicate historical experiment outputs.
+   - Large raw datasets and downloaded archives.
+   - Old submission ZIP files.
+
+6. Ensure the project can be installed and tested from a clean environment. All README commands and included configuration files should be valid.
+
+7. Since the Forest Covertypes raw CSV is excluded, clearly document its source, the binary-label transformation, and how to regenerate it. Ensure the included configuration does not misleadingly imply the dataset is bundled.
+
+8. Preserve the original project files and all existing experimental results. Create the submission in a separate staging directory; do not delete, overwrite, or reorganize the working project.
+
+9. Run the existing automated tests and perform a lightweight verification of the staged package. Check that all referenced deliverables exist and that required result files are readable.
+
+10. Create a single ZIP archive named `易云轩_题目一_XGBoost分类算子.zip`.
+
+Do not add new functionality, refactor the implementation, modify experimental results, or perform additional large-scale training.
+
+Finally, report:
+- ZIP location and size.
+- Main included files and directories.
+- Test results.
+- Any missing requirements or reproducibility limitations.
+
+Keep the submission concise, complete, and easy for an evaluator to navigate.

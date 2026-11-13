@@ -1,0 +1,103 @@
+Collecting xgboost==3.2.0
+  Downloading xgboost-3.2.0-py3-none-macosx_12_0_arm64.whl (2.3 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.3/2.3 MB 555.9 kB/s eta 0:00:00
+Collecting dask[dataframe,distributed]==2026.8.0
+  Downloading dask-2026.8.0-py3-none-any.whl (1.5 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 1.8 MB/s eta 0:00:00
+Collecting distributed==2026.8.0
+  Downloading distributed-2026.8.0-py3-none-any.whl (1.0 MB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.0/1.0 MB 1.1 MB/s eta 0:00:00
+Collecting scikit-learn==1.7.2
+  Using cached scikit_learn-1.7.2-cp310-cp310-macosx_12_0_arm64.whl (8.7 MB)
+Collecting numpy==2.2.6
+  Using cached numpy-2.2.6-cp310-cp310-macosx_14_0_arm64.whl (5.3 MB)
+Collecting pandas==2.3.3
+  Using cached pandas-2.3.3-cp310-cp310-macosx_11_0_arm64.whl (10.8 MB)
+Collecting matplotlib==3.10.9
+  Using cached matplotlib-3.10.9-cp310-cp310-macosx_11_0_arm64.whl (8.2 MB)
+Collecting seaborn==0.13.2
+  Downloading seaborn-0.13.2-py3-none-any.whl (294 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 294.9/294.9 KB 9.7 MB/s eta 0:00:00
+Collecting joblib==1.6.0
+  Using cached joblib-1.6.0-py3-none-any.whl (306 kB)
+Collecting pytest==9.2.0
+  Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 411.8/411.8 KB 1.3 MB/s eta 0:00:00
+Collecting threadpoolctl==3.8.0
+  Using cached threadpoolctl-3.8.0-py3-none-any.whl (32 kB)
+Collecting scipy
+  Using cached scipy-1.15.3-cp310-cp310-macosx_14_0_arm64.whl (22.4 MB)
+Collecting pyyaml>=5.4.1
+  Using cached pyyaml-6.0.3-cp310-cp310-macosx_11_0_arm64.whl (174 kB)
+Collecting click>=8.1
+  Using cached click-8.5.1-py3-none-any.whl (126 kB)
+Collecting packaging>=20.0
+  Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Collecting fsspec>=2021.09.0
+  Using cached fsspec-2026.9.0-py3-none-any.whl (221 kB)
+Collecting toolz>=0.12.0
+  Using cached toolz-1.2.0-py3-none-any.whl (60 kB)
+Collecting partd>=1.4.0
+  Using cached partd-1.4.2-py3-none-any.whl (18 kB)
+Collecting cloudpickle>=3.0.0
+  Using cached cloudpickle-3.1.2-py3-none-any.whl (22 kB)
+Collecting importlib_metadata>=4.13.0
+  Using cached importlib_metadata-9.0.1-py3-none-any.whl (27 kB)
+Collecting pyarrow>=16.0
+  Using cached pyarrow-25.0.1-cp310-cp310-macosx_12_0_arm64.whl (36.0 MB)
+Collecting locket>=1.0.0
+  Using cached locket-1.0.0-py2.py3-none-any.whl (4.4 kB)
+Collecting psutil>=5.8.0
+  Using cached psutil-7.2.2-cp36-abi3-macosx_11_0_arm64.whl (129 kB)
+Collecting jinja2>=2.10.3
+  Using cached jinja2-3.1.6-py3-none-any.whl (134 kB)
+Collecting tblib!=3.2.0,!=3.2.1,>=1.6.0
+  Using cached tblib-3.2.2-py3-none-any.whl (12 kB)
+Collecting msgpack>=1.0.2
+  Using cached msgpack-1.2.4-cp310-cp310-macosx_11_0_arm64.whl (90 kB)
+Collecting sortedcontainers>=2.0.5
+  Using cached sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+Collecting tornado>=6.2.0
+  Using cached tornado-6.5.10-cp39-abi3-macosx_10_9_universal2.whl (465 kB)
+Collecting zict>=3.0.0
+  Using cached zict-3.0.0-py2.py3-none-any.whl (43 kB)
+Collecting python-dateutil>=2.8.2
+  Using cached python_dateutil-3.0.0-py2.py3-none-any.whl (94 kB)
+Collecting tzdata>=2022.7
+  Using cached tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Collecting pytz>=2020.1
+  Using cached pytz-2026.6-py2.py3-none-any.whl (506 kB)
+Collecting pyparsing>=3
+  Using cached pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Collecting kiwisolver>=1.3.1
+  Using cached kiwisolver-1.5.1-cp310-cp310-macosx_11_0_arm64.whl (64 kB)
+Collecting fonttools>=4.22.0
+  Using cached fonttools-4.65.0-cp310-cp310-macosx_10_9_universal2.whl (3.1 MB)
+Collecting pillow>=8
+  Using cached pillow-12.3.0-cp310-cp310-macosx_11_0_arm64.whl (4.8 MB)
+Collecting contourpy>=1.0.1
+  Using cached contourpy-1.3.2-cp310-cp310-macosx_11_0_arm64.whl (253 kB)
+Collecting cycler>=0.10
+  Using cached cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Collecting tomli>=2
+  Using cached tomli-2.5.0-py3-none-any.whl (14 kB)
+Collecting iniconfig>=2
+  Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Collecting pluggy<2,>=1.6
+  Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+Collecting exceptiongroup>=1
+  Using cached exceptiongroup-1.3.1-py3-none-any.whl (16 kB)
+Collecting pygments>=2.15
+  Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+Collecting typing-extensions>=4.6.0
+  Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Collecting zipp>=3.20
+  Using cached zipp-4.1.2-py3-none-any.whl (10 kB)
+Collecting MarkupSafe>=2.0
+  Using cached markupsafe-3.0.4-cp310-cp310-macosx_11_0_arm64.whl (12 kB)
+Collecting six>=1.6
+  Using cached six-1.17.0-py2.py3-none-any.whl (11 kB)
+Installing collected packages: sortedcontainers, pytz, zipp, zict, tzdata, typing-extensions, tornado, toolz, tomli, threadpoolctl, tblib, six, pyyaml, pyparsing, pygments, pyarrow, psutil, pluggy, pillow, packaging, numpy, msgpack, MarkupSafe, locket, kiwisolver, iniconfig, fsspec, fonttools, cycler, cloudpickle, click, scipy, python-dateutil, partd, joblib, jinja2, importlib_metadata, exceptiongroup, contourpy, xgboost, scikit-learn, pytest, pandas, matplotlib, dask, seaborn, distributed
+Successfully installed MarkupSafe-3.0.4 click-8.5.1 cloudpickle-3.1.2 contourpy-1.3.2 cycler-0.12.1 dask-2026.8.0 distributed-2026.8.0 exceptiongroup-1.3.1 fonttools-4.65.0 fsspec-2026.9.0 importlib_metadata-9.0.1 iniconfig-2.3.1 jinja2-3.1.6 joblib-1.6.0 kiwisolver-1.5.1 locket-1.0.0 matplotlib-3.10.9 msgpack-1.2.4 numpy-2.2.6 packaging-26.3 pandas-2.3.3 partd-1.4.2 pillow-12.3.0 pluggy-1.7.0 psutil-7.2.2 pyarrow-25.0.1 pygments-2.21.0 pyparsing-3.3.3 pytest-9.2.0 python-dateutil-3.0.0 pytz-2026.6 pyyaml-6.0.3 scikit-learn-1.7.2 scipy-1.15.3 seaborn-0.13.2 six-1.17.0 sortedcontainers-2.4.0 tblib-3.2.2 threadpoolctl-3.8.0 tomli-2.5.0 toolz-1.2.0 tornado-6.5.10 typing-extensions-4.16.0 tzdata-2026.6 xgboost-3.2.0 zict-3.0.0 zipp-4.1.2
+WARNING: You are using pip version 22.0.4; however, version 26.3 is available.
+You should consider upgrading via the '/Users/yyi/Projects/ZHCK_Q1_submission__rw0jj5w/clean_env/bin/python -m pip install --upgrade pip' command.
